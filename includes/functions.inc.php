@@ -1,7 +1,6 @@
 <?php
 
 function emptySignupInput($username, $password, $password_repeat){
-    
     $result;
 
     if(empty($username) || empty($password) || empty($password_repeat)){
@@ -13,7 +12,7 @@ function emptySignupInput($username, $password, $password_repeat){
     return $result;
 }
 
-function usernameExists($connect, $username){
+function useridExists($connect, $username){
     
     $sql = "SELECT * FROM signup_info WHERE username = ?;";
     $stmt = mysqli_stmt_init($connect);
@@ -59,7 +58,7 @@ function createUser($connect, $username, $password){
     
     $stmt = mysqli_stmt_init($connect);
     
-    if (!mysqli_stmt_prepare($connect, $sql)) {
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: signup.php?error=stmtfailed");
         exit();
     }

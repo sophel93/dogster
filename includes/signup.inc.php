@@ -1,30 +1,29 @@
 <?php
 
 if (isset($_POST["submit"])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $password_repeat = $_POST['repeat-password'];
+    $userid = $_POST['username'];
+    $userpwd = $_POST['password'];
+    $password_repeat = $_POST['password_repeat'];
 
     require_once('dbhandler.php');
     require_once('functions.inc.php');
 
-    /*if (emptySignupInput($username, $password, $password_repeat) !== false){
-        
+    if (emptySignupInput($userid, $userpwd, $password_repeat) !== false){
         header("location: signup.php?error=emptyinput");
         exit();
-    }*/
+    }
 
-    if (usernameExists($connect, $username) !== false){
-        header("location: signup.php?error=usernametaken");
+    if (useridExists($connect, $userid) !== false){
+        header("location: signup.php?error=useridtaken");
         exit();
     } 
 
-    if (passwordMatch($password, $password_repeat) !== false){
+    if (passwordMatch($userpwd, $password_repeat) !== false){
         header("location: signup.php?error=passworderror");
         exit();
     }
 
-    createUser($connect, $username, $password);
+    createUser($connect, $userid, $userpwd);
     } else {
         header("location: signup.php");
 }
