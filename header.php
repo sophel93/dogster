@@ -1,11 +1,6 @@
 <?php 
 
 session_start();
-$mysqli = new mysqli('localhost', 'root', '', 'dogsterdb') or die(mysqli_error($mysqli));
-
-$username = '';
-$password = '';
-$update = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
