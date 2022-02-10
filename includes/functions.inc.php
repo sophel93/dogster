@@ -106,7 +106,7 @@ function loginUser($connect, $userid, $userpwd){
         session_start();
         $_SESSION['id'] = $useridExists['id'];
         $_SESSION['username'] = $useridExists['username'];
-        header("location: ../index.php");
+        header("location: homepage.php");
         exit();
     }
 }
