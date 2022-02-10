@@ -20,7 +20,7 @@ session_start();
 <ul>
     <?php if (isset($_SESSION['id'])) {
         echo '<li><a href="homepage.php">My profile</a></li>';
-        echo '<li><a href="logout.php">Log out</a></li>';
+        echo '<li><a href="includes\logout.inc.php">Log out</a></li>';
     
     } else {
         echo '<li><a href="signup.php">Sign up</a></li>';
