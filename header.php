@@ -23,16 +23,14 @@ $update = false;
             <li><a href="index.php">Home</a></li>
 </ul>
 <ul>
-    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) : ?>
-        <li><a href="homepage.php">My profile</a></li>
-        <li><a href="logout.php">Log out</a></li>
+    <?php if (isset($_SESSION['id'])) {
+        echo '<li><a href="homepage.php">My profile</a></li>';
+        echo '<li><a href="logout.php">Log out</a></li>';
     
-    <?php else : ?>
-        <li><a href="signup.php">Sign up</a></li>
-        <li><a href="login.php">Log in</a></li>
-    <?php ;
-
-    endif; ?>
+    } else {
+        echo '<li><a href="signup.php">Sign up</a></li>';
+        echo '<li><a href="login.php">Log in</a></li>';
+    } ?>
 </ul>
 </div>
 </nav>

@@ -93,7 +93,6 @@ function loginUser($connect, $userid, $userpwd){
 
     if ($useridExists === false){
         header("location: ../login.php?error=loginfailed");
-        echo "<p> Username doesn't exist.</p>";
         exit();
     }
 
@@ -102,7 +101,6 @@ function loginUser($connect, $userid, $userpwd){
 
     if ($verifiedPassword === false){
         header("location: ../login.php?error=passworderror");
-        echo "<p> Incorrect password. </p>";
         exit();
     } else if ($verifiedPassword === true){
         session_start();
