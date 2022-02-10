@@ -1,9 +1,9 @@
 <?php
 
-function emptySignupInput($username, $password, $password_repeat){
+function emptySignupInput($userid, $userpwd, $password_repeat){
     $result;
 
-    if(empty($username) || empty($password) || empty($password_repeat)){
+    if(empty($userid) || empty($userpwd) || empty($password_repeat)){
         $result = true;
     } else{
         $result = false;
@@ -12,7 +12,7 @@ function emptySignupInput($username, $password, $password_repeat){
     return $result;
 }
 
-function useridExists($connect, $username){
+function useridExists($connect, $userid){
     
     $sql = "SELECT * FROM signup_info WHERE username = ?;";
     $stmt = mysqli_stmt_init($connect);
@@ -23,7 +23,7 @@ function useridExists($connect, $username){
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_bind_param($stmt, "s", $userid);
     mysqli_stmt_execute($stmt);
 
     $results = mysqli_stmt_get_result($stmt);
@@ -38,10 +38,10 @@ function useridExists($connect, $username){
 }
 
 
-function passwordMatch($password, $password_repeat){
+function passwordMatch($userpwd, $password_repeat){
     $result;
 
-    if ($password !== $password_repeat){
+    if ($userpwd !== $password_repeat){
         $result = true;
     
     } else {
@@ -52,7 +52,7 @@ function passwordMatch($password, $password_repeat){
 }
 
 
-function createUser($connect, $username, $password){
+function createUser($connect, $userid, $userpwd){
     
     $sql = "INSERT INTO signup_info (username, password) VALUES (?, ?);";
     
@@ -63,15 +63,52 @@ function createUser($connect, $username, $password){
         exit();
     }
 
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash($userpwd, PASSWORD_DEFAULT);
 
 
 
-    mysqli_stmt_bind_param($stmt, "ss", $username, $hashedPassword);
+    mysqli_stmt_bind_param($stmt, "ss", $userid, $hashedPassword);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
     header("Location: ../signup.php?error=none");
     exit();
 
+}
+
+function emptyLoginInput($userid, $userpwd){
+    $result;
+
+    if(empty($userid) || empty($userpwd)){
+        $result = true;
+    } else{
+        $result = false;
+    } 
+    
+    return $result;
+}
+
+function loginUser($connect, $userid, $userpwd){
+    $useridExists = useridExists($connect, $userid);
+
+    if ($useridExists === false){
+        header("location: ../login.php?error=loginfailed");
+        echo "<p> Username doesn't exist.</p>";
+        exit();
+    }
+
+    $hashedPassword = $useridExists['password'];
+    $verifiedPassword = password_verify($userpwd, $hashedPassword);
+
+    if ($verifiedPassword === false){
+        header("location: ../login.php?error=passworderror");
+        echo "<p> Incorrect password. </p>";
+        exit();
+    } else if ($verifiedPassword === true){
+        session_start();
+        $_SESSION['id'] = $useridExists['id'];
+        $_SESSION['username'] = $useridExists['username'];
+        header("location: ../index.php");
+        exit();
+    }
 }
