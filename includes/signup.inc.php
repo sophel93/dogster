@@ -9,21 +9,21 @@ if (isset($_POST["submit"])) {
     require_once('functions.inc.php');
 
     if (emptySignupInput($userid, $userpwd, $password_repeat) !== false){
-        header("location: signup.php?error=emptyinput");
+        header("location: ../signup.php?error=emptyinput");
         exit();
     }
 
     if (useridExists($connect, $userid) !== false){
-        header("location: signup.php?error=useridtaken");
+        header("location: ../signup.php?error=useridtaken");
         exit();
     } 
 
     if (passwordMatch($userpwd, $password_repeat) !== false){
-        header("location: signup.php?error=passworderror");
+        header("location: ../signup.php?error=passworderror");
         exit();
     }
 
     createUser($connect, $userid, $userpwd);
     } else {
-        header("location: signup.php");
+        header("location: ../signup.php?error=none");
 }

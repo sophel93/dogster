@@ -11,4 +11,21 @@
     </form>
 </section>
 
-<?php require 'footer.php'; ?>
+<?php 
+
+if (isset($_GET["error"])) {
+    if($_GET["error"] == "emptyinput"){ 
+      echo"<p> Fill in all fields! </p>";
+        
+    } else if($_GET["error"] == "useridtaken"){
+        echo"<p> The username is already taken. </p>";
+    } else if($_GET["error"] == "passworderror"){
+        echo"<p> Passwords don't match. </p>";
+    } else if($_GET["error"] == "stmtfailed"){ 
+        echo"<p> Something went wrong, please try again. </p>";
+    } else if($_GET["error"] == "none"){ 
+        echo"<p> Sign up complete, you may now log in. </p>";
+    } 
+}
+
+require 'footer.php'; ?>
