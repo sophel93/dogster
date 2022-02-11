@@ -115,7 +115,7 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     
     $useridExists = useridExists($connect, $userid);
 
-    if($useridExists === true){
+    if($useridExists !== false){
         header("location: ../edit-profile.php?error=useridtaken");
         exit();
     }

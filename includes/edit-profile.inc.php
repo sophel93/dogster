@@ -10,6 +10,10 @@ if(isset($_POST['update'])){
     require_once('dbhandler.php');
     require_once('functions.inc.php');
     
+    if (useridExists($connect, $userid) !== false){
+        header("location: ../edit-profile.php?error=useridtaken");
+        exit();
+    } 
     updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo);
 }
 ?>
