@@ -112,6 +112,14 @@ function loginUser($connect, $userid, $userpwd){
 }
 
 function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
+    
+    $useridExists = useridExists($connect, $userid);
+
+    if($useridExists === true){
+        header("location: ../edit-profile.php?error=useridtaken");
+        exit();
+    }
+
     $sql = "UPDATE signup_info SET username= ?, age= ?, sex= ?, additional_info= ? WHERE id=$id";
 
     $stmt = mysqli_stmt_init($connect);
@@ -125,6 +133,11 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
+    session_start();
+    $_SESSION['username'] = $userid;
+    $_SESSION['age'] = $age;
+    $_SESSION['sex'] = $sex;
+    $_SESSION['additional_info'] = $additionalInfo;
     header("Location: ../edit-profile.php?error=none");
     exit();
 }

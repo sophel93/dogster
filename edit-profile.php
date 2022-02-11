@@ -23,4 +23,14 @@ require 'header.php';
     </form>
 </section>
 
-<?php require 'footer.php'; ?>
+<?php 
+
+if (isset($_GET["error"])) {
+    if($_GET["error"] == "useridtaken"){
+        echo"<p> The username is already taken. </p>";
+    } else if($_GET["error"] == "none"){ 
+        echo"<p> Profile info updated. </p>";
+    } 
+}
+
+require 'footer.php'; ?>

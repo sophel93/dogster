@@ -9,7 +9,7 @@ if(isset($_POST['update'])){
 
     require_once('dbhandler.php');
     require_once('functions.inc.php');
-
+    
     updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo);
 }
 ?>

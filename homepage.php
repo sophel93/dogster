@@ -22,7 +22,7 @@
                 <li>Sex: <?php echo $_SESSION['sex'];?></li>
                 <li>Breed</li>
                 <li>Location</li>
-                <li class="flex-grow-2">Additional information: <?php echo $_SESSION['additional_information'];?></li>
+                <li class="flex-grow-2">Additional information: <?php echo $_SESSION['additional_info'];?></li>
         </div>
     </div>
 
