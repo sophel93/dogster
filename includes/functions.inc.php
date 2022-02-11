@@ -111,6 +111,19 @@ function loginUser($connect, $userid, $userpwd){
     }
 }
 
+function emptyInput($userid, $age, $sex, $additionalInfo){
+    $result;
+
+    if(empty($userid) || empty($age) || empty($sex) || empty($additionalInfo)){
+        $result = true;
+    } else{
+        $result = false;
+    } 
+    
+    return $result;
+}
+
+
 function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     
     $useridExists = useridExists($connect, $userid);
@@ -134,10 +147,12 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     mysqli_stmt_close($stmt);
 
     session_start();
+    $_SESSION['id'] = $id;
     $_SESSION['username'] = $userid;
     $_SESSION['age'] = $age;
-    $_SESSION['sex'] = $sex;
+    $_SESSION['location'] = $location;
     $_SESSION['additional_info'] = $additionalInfo;
+    
     header("Location: ../edit-profile.php?error=none");
     exit();
 }

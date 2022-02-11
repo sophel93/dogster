@@ -26,7 +26,10 @@ require 'header.php';
 <?php 
 
 if (isset($_GET["error"])) {
-    if($_GET["error"] == "useridtaken"){
+    if($_GET["error"] == "emptyinput"){
+        echo"<p> Please fill in all fields! </p>";
+    } 
+    else if($_GET["error"] == "useridtaken"){
         echo"<p> The username is already taken. </p>";
     } else if($_GET["error"] == "none"){ 
         echo"<p> Profile info updated. </p>";
