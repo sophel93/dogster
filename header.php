@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+$_SESSION;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,4 +31,4 @@ session_start();
 </div>
 </nav>
 
-<main class = "flex-column flex-centered hero" >
+<main class = "" >

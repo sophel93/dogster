@@ -5,15 +5,15 @@ require 'header.php';
 ?>
 
 
-
-<?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true ) : ?>
-    <h1 class = "mb-headers negative">Let's sniff around!</h1>
+<section class = "flex-column flex-centered hero" style = "background-image: url('images\729709408-huge.jpg');">
+<?php if (isset($_SESSION['id'])) : ?>
+    <h1 class = "mb-headers">Let's sniff around!</h1>
 <?php else : ?>
-    <h1 class = "mb-headers negative">Sign up to meet new furry friends from your area!</h1>
+    <h1 class = "mb-headers">Sign up to meet new furry friends from your area!</h1>
     <a href="signup.php"><button class ="sign-up-btn">Sign up now</button></a> 
         
 <?php ; endif;?>
-
+</section>
 
 
 <section class="index-content">

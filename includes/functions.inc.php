@@ -110,3 +110,21 @@ function loginUser($connect, $userid, $userpwd){
         exit();
     }
 }
+
+function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
+    $sql = "UPDATE signup_info SET username= ?, age= ?, sex= ?, additional_info= ? WHERE id=$id";
+
+    $stmt = mysqli_stmt_init($connect);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../edit-profile.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $userid, $age, $sex, $additionalInfo);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    header("Location: ../edit-profile.php?error=none");
+    exit();
+}

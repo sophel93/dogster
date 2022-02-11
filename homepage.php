@@ -12,17 +12,17 @@
     
     <div class ="profile-info-wrapper">
         <div>
-            <img src ="images\shutterstock_1875919753.jpg" class="profile-img">
-            <a href ="edit-profile-form.php"><button > Edit profile </button></a>
+            <img src ="" class="profile-img" alt ="Profile Image">
+            <a href ="edit-profile.php"><button > Edit profile </button></a>
         </div>
         
         <div>
             <ul>
-                <li>Age</li>
-                <li>Sex</li>
+                <li>Age: <?php echo $_SESSION['age'];?></li>
+                <li>Sex: <?php echo $_SESSION['sex'];?></li>
                 <li>Breed</li>
                 <li>Location</li>
-                <li class="flex-grow-2">Additional information</li>
+                <li class="flex-grow-2">Additional information: <?php echo $_SESSION['additional_information'];?></li>
         </div>
     </div>
 
