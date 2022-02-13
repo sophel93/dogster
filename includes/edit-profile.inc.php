@@ -21,6 +21,14 @@ if(isset($_POST['update'])){
     }
 
     updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo);
-    
+
 }
-?>
+
+if(isset($_POST['delete'])){
+    $id = $_POST['id'];
+
+    require_once('dbhandler.php');
+    require_once('functions.inc.php');
+
+    deleteUser($connect, $id);
+}

@@ -106,7 +106,7 @@ function loginUser($connect, $userid, $userpwd){
         session_start();
         $_SESSION['id'] = $useridExists['id'];
         $_SESSION['username'] = $useridExists['username'];
-        header("location: homepage.php");
+        header("location: ../homepage.php");
         exit();
     }
 }
@@ -155,4 +155,20 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     
     header("Location: ../edit-profile.php?error=none");
     exit();
+}
+
+function deleteUser($connect, $id){
+    $sql = "DELETE FROM signup_info WHERE id=$id";
+
+    if (mysqli_query($connect, $sql)){
+        
+        session_start();
+        session_unset();
+        session_destroy();
+
+        header("location: ../index.php");
+        echo "Profile deleted.";
+    }
+
+    mysqli_close($connect);
 }

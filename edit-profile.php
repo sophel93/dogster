@@ -20,6 +20,7 @@ require 'header.php';
         <textarea name = "additional_info" rows = "30" cols ="10" placeholder="Additional information"></textarea>
         
         <button type="submit" name="update">Save changes</button>
+        <button type="submit" name="delete">Delete profile</button>
     </form>
 </section>
 
@@ -35,5 +36,4 @@ if (isset($_GET["error"])) {
         echo"<p> Profile info updated. </p>";
     } 
 }
-
 require 'footer.php'; ?>
