@@ -23,7 +23,7 @@
                 <li>Breed</li>
                 <li>Location</li>
                 <li class="flex-grow-2">Additional information: <?php echo $_SESSION['additional_info'] ?? '';?></li>
-        </div>
+            </ul>
     </div>
 
 </section>

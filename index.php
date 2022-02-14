@@ -21,16 +21,19 @@ require 'header.php';
 
         require 'includes\dbhandler.php';
 
-        $sql = "SELECT username, location FROM signup_info";
+        $sql = "SELECT id, username, location FROM signup_info";
         $result = mysqli_query($connect, $sql);
         
-        if ($result->num_rows > 0 ) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo $row['username'], $row['location'];
-                
-            }
-        mysqli_close($connect);
-        }
+        if (mysqli_num_rows($result) > 0 ) { ?>
+            <ul>
+                <?php while ($row = mysqli_fetch_assoc($result)) {?>
+                    <li><a href="profiledisplay.php?id=<?php echo $row['id'];?>"><?php echo $row['username'];?>
+                        <ul><li><?php echo $row['location']; ?></li></ul>
+                    </li>
+                <?php }
+            mysqli_close($connect); ?>
+            </ul>
+       <?php }
     } else { ?>
     <h1>Lorem ipsum</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dignissim dignissim quam sed maximus. 

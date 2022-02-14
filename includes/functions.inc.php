@@ -126,14 +126,9 @@ function emptyInput($userid, $age, $sex, $additionalInfo){
 
 function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
     
-    $useridExists = useridExists($connect, $userid);
-
-    if($useridExists !== false){
-        header("location: ../edit-profile.php?error=useridtaken");
-        exit();
-    }
-
-    $sql = "UPDATE signup_info SET username= ?, age= ?, sex= ?, additional_info= ? WHERE id=$id";
+    $sql = "UPDATE signup_info 
+                SET username= ?, age= ?, sex= ?, additional_info= ? 
+                WHERE id=$id";
 
     $stmt = mysqli_stmt_init($connect);
 
