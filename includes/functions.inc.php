@@ -166,4 +166,27 @@ function deleteUser($connect, $id){
     }
 
     mysqli_close($connect);
+    exit ();
+}
+
+function addToFavorites($connect, $user_id, $target_user_id){
+    $sql = "INSERT INTO user_favorites (user_id, target_user_id) VALUES (?, ?);";
+
+    $stmt = mysqli_stmt_init($connect);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: profiledisplay.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ii", $user_id, $target_user_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    if (mysqli_query($connect, $sql)){
+        header("location: ../profiledisplay.php?error=none");
+    
+    }
+
+    exit();
 }
