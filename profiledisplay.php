@@ -10,6 +10,7 @@
 
     $row = mysqli_fetch_assoc($result);
 
+    $name = $row['username'];
     $id = $row['id'];
     $age = $row['age'];
     $sex = $row['sex'];
@@ -17,36 +18,44 @@
 ?>
 
 
-<section> 
-    <div class = "profile-info-wrapper">
-    <ul>
-                <li>Age: <?php echo $age; ?></li>
-                <li>Sex:<?php echo $sex; ?></li>
-                <li>Breed</li>
-                <li>Location</li>
-                <li class="flex-grow-2">Additional information: <?php echo $additional_info;?></li>
-            </ul>
-            <?php // Jos tällä sivulla näkyvä profiili ei ole nykyisen käyttäjän suosikeissa ?>
-                <a href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>">Lisää vittu suosikkeihin</a>
-            <?php //muuten näytä "poista suosikeista"?>
-            <a href ="">Poista vittu suosikeista</a>
-    </div>
+<section class = "profile-info"> 
+    <div class = "wrapper">
+        <h1><?php echo $name;?></h1>
+        <ul>
+            <li>Age: <?php echo $age; ?></li>
+            <li>Sex:<?php echo $sex; ?></li>
+            <li>Breed</li>
+            <li>Location</li>
+            <li class="flex-grow-2">Additional information: <?php echo $additional_info;?></li>
+        </ul>
+            
+        <?php   // Jos tällä sivulla näkyvä profiili ei ole nykyisen käyttäjän suosikeissa
+                // Selvitä löytyykö tällä sivulla näkyvän profiilin id nykyisen käyttäjän target_user_id solusts
+                require_once 'includes\dbhandler.php';
+                
+                $current_user = $_SESSION['id'];
+                
+                $sql = "SELECT 
+                            COUNT(target_user_id)
+                        FROM
+                            user_favorites
+                        WHERE
+                            user_id = $current_user
+                        AND target_user_id = $id;";
+
+                $result = mysqli_query($connect, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $return_value = implode($row);
+
+         if ($return_value > 0){?>
+            <a class = "remove-from-favorites" href="includes\remove-from-favorites.inc.php?id=<?php echo $id ;?>"><i class="fa-solid fa-heart"></i></a>
+                    
+        <?php } else {?>
+            <a class = "add-to-favorites" href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>"><i class="fa-regular fa-heart"></i></a>
+        <?php } ?>
     
-
-
+    </div>
 </section>
-
-<?php
-
-
-if (isset($_GET["error"])) {
-    if ($_GET["error"] == "none"){
-        echo "User added to favorites";
-    }
-}
-
-?>
-
 
 
 

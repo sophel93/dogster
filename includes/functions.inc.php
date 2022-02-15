@@ -220,64 +220,20 @@ function addToFavorites($connect, $user_id, $target_user_id){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    header("location: ../profiledisplay.php?error=none");
+    header("location: ../profiledisplay.php?id=$target_user_id&error=none");
+    session_start();
     exit();
 }
 
-function getUserFavorites($connect, $id){
-    require_once 'includes\dbhandler.php';
+function removeFromFavorites($connect, $target_user_id, $user_id){
+    $sql = "DELETE FROM user_favorites WHERE target_user_id = $target_user_id AND user_id = $user_id;";
 
-    $sql = "SELECT FROM user_favorites WHERE user_id=?";
+    if (mysqli_query($connect, $sql)){
 
-    $stmt = mysqli_stmt_init($connect);
-    
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        
-        header("location: homepage.php?error=stmtfailed");
-        exit();
+        header("location: ../profiledisplay.php?id=$target_user_id&error=none");
     }
-
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-
-    $results = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($results)) {
-        return $row;
-        $target_user_id = $row['target_user_id'];
-        
-   
-    } else {
-        $results = false;
-        
-        return $results;
-    }
-
-    $sql = "SELECT FROM signup_info WHERE id=?";
-      
-    $stmt = mysqli_stmt_init($connect);
-    
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        
-        header("location: homepage.php?error=stmtfailed");
-        exit();
-    }
-
-    mysqli_stmt_bind_param($stmt, "i", $target_user_id);
-    mysqli_stmt_execute($stmt);
-
-    $results = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($results)) {
-        return $row;
-        $userid = $row['username'];
-        
-   
-    } else {
-        $results = false;
-        
-        return $results;
-    }
-    
+    mysqli_close($connect);
+    session_start();
+    exit();
 }
 

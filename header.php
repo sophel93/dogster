@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dogster - Make new four legged friends!</title>
     <link rel = "stylesheet" href = "css\styles.css">
+    <script src="https://kit.fontawesome.com/a1f8d3e529.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav>

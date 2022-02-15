@@ -42,6 +42,15 @@ nav > div > ul > li{
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    border: solid 1px red;
+}
+
+.content{
+    border: solid 1px blue;
+}
+
+.center-align{
+    text-align: center;
 }
 
 footer{
@@ -72,7 +81,7 @@ footer{
     border: none;
 }
 section{
-    padding: 5em 10em 5em 10em;
+    padding: 2em 6em 4em 6em;
 }
 
 .profile-info-wrapper{
@@ -102,5 +111,20 @@ section{
 
 .flex-grow-2{
     flex-grow: 2;
+}
+
+.display-users{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.display-users > li > a {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.display-users > li > a:hover{
+    font-weight: bolder;
 }
 

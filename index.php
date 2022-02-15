@@ -16,7 +16,7 @@ require 'header.php';
 </section>
 
 
-<section class="index-content">
+<section class="content">
     <?php if (isset($_SESSION['id'])) { 
 
         require 'includes\dbhandler.php';
@@ -25,12 +25,15 @@ require 'header.php';
         $result = mysqli_query($connect, $sql);
         
         if (mysqli_num_rows($result) > 0 ) { ?>
-            <ul>
-                <?php while ($row = mysqli_fetch_assoc($result)) {?>
+            <h1 class ="center-align">Meet some of our latest users</h1>
+            <ul class = "display-users">
+                <?php while ($row = mysqli_fetch_assoc($result)) {
+                    if ($row['id'] !== $_SESSION['id']) {?>
                     <li><a href="profiledisplay.php?id=<?php echo $row['id'];?>"><?php echo $row['username'];?>
-                        <ul><li><?php echo $row['location']; ?></li></ul>
+                        
                     </li>
                 <?php }
+                }
             mysqli_close($connect); ?>
             </ul>
        <?php }

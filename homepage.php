@@ -21,8 +21,7 @@ $id = $_SESSION['id'];?>
             </ul>
     </div>
     <div class = "user-favorites-wrapper">
-        <?php 
-            require_once 'includes\dbhandler.php';
+        <?php  require_once 'includes\dbhandler.php';
 
             $sql = "SELECT
                         user_favorites.target_user_id,
@@ -34,16 +33,19 @@ $id = $_SESSION['id'];?>
                     WHERE
                         user_favorites.user_id = $id;";
 
-        $result = mysqli_query($connect, $sql);
+            $result = mysqli_query($connect, $sql);
 
-        if (mysqli_num_rows($result) > 0 ) { ?>
-        
-        <ul>
-            <?php while ($row = mysqli_fetch_assoc($result)) {?>
+            if (mysqli_num_rows($result) > 0 ) { ?>
+
+            <ul>
+            <?php while ($row = mysqli_fetch_assoc($result)){?>
+                
             <li><a href ="profiledisplay.php?id=<?php echo $row['id']; ?>"><?php echo $row['username'];?></a></li>
             <?php } ?>
-        <ul><?php } else {?>
-        <h2>No favorite users to display </h2><?php }?>
+            <ul><?php } else {?>
+            <h2>No favorite users to display </h2><?php }
+        
+        ?>
     </div>
 
 </section>
