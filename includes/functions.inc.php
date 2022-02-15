@@ -169,6 +169,43 @@ function deleteUser($connect, $id){
     exit ();
 }
 
+function getUserInfo($connect, $id){
+    
+    require_once 'includes\dbhandler.php';
+
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM signup_info WHERE id=?";
+
+    $stmt = mysqli_stmt_init($connect);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        
+        header("location: signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+
+    $results = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($results)) {
+        return $row;
+        
+        $id = $row['id'];
+        $age = $row['age'];
+        $sex = $row['sex'];
+        $additional_info = $row['additional_info'];
+   
+    } else {
+        $results = false;
+        
+        return $results;
+    }
+
+}
+
 function addToFavorites($connect, $user_id, $target_user_id){
     $sql = "INSERT INTO user_favorites (user_id, target_user_id) VALUES (?, ?);";
 
@@ -183,10 +220,64 @@ function addToFavorites($connect, $user_id, $target_user_id){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    if (mysqli_query($connect, $sql)){
-        header("location: ../profiledisplay.php?error=none");
-    
-    }
-
+    header("location: ../profiledisplay.php?error=none");
     exit();
 }
+
+function getUserFavorites($connect, $id){
+    require_once 'includes\dbhandler.php';
+
+    $sql = "SELECT FROM user_favorites WHERE user_id=?";
+
+    $stmt = mysqli_stmt_init($connect);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        
+        header("location: homepage.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    $results = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($results)) {
+        return $row;
+        $target_user_id = $row['target_user_id'];
+        
+   
+    } else {
+        $results = false;
+        
+        return $results;
+    }
+
+    $sql = "SELECT FROM signup_info WHERE id=?";
+      
+    $stmt = mysqli_stmt_init($connect);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        
+        header("location: homepage.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $target_user_id);
+    mysqli_stmt_execute($stmt);
+
+    $results = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($results)) {
+        return $row;
+        $userid = $row['username'];
+        
+   
+    } else {
+        $results = false;
+        
+        return $results;
+    }
+    
+}
+

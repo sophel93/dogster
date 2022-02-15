@@ -11,4 +11,11 @@ if (isset($_GET['id'])) {
 
     addToFavorites($connect, $user_id, $target_user_id);
 
+    if (isset($_GET["error"])){
+        if ($_GET["error"] === "none"){
+            echo "Profile added to favorites!";
+            exit();
+        }
+    }
+
 }

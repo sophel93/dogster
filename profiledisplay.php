@@ -26,7 +26,10 @@
                 <li>Location</li>
                 <li class="flex-grow-2">Additional information: <?php echo $additional_info;?></li>
             </ul>
-            <a href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>">Lisää vittu suosikkeihin</a>
+            <?php // Jos tällä sivulla näkyvä profiili ei ole nykyisen käyttäjän suosikeissa ?>
+                <a href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>">Lisää vittu suosikkeihin</a>
+            <?php //muuten näytä "poista suosikeista"?>
+            <a href ="">Poista vittu suosikeista</a>
     </div>
     
 
