@@ -5,18 +5,18 @@ require 'header.php';
 ?>
 
 
-<section class = "flex-column flex-centered hero" style = "background-image: url('images\729709408-huge.jpg');">
+<section style = "background-image: url('images\729709408-huge.jpg');">
 <?php if (isset($_SESSION['id'])) : ?>
-    <h1 class = "mb-headers">Let's sniff around!</h1>
+    <h1>Let's sniff around!</h1>
 <?php else : ?>
-    <h1 class = "mb-headers">Sign up to meet new furry friends from your area!</h1>
-    <a href="signup.php"><button class ="sign-up-btn">Sign up now</button></a> 
+    <h1>Sign up to meet new furry friends from your area!</h1>
+    <a href="signup.php"><button>Sign up now</button></a> 
         
 <?php ; endif;?>
 </section>
 
 
-<section class="content">
+<section>
     <?php if (isset($_SESSION['id'])) { 
 
         require 'includes\dbhandler.php';
@@ -25,11 +25,17 @@ require 'header.php';
         $result = mysqli_query($connect, $sql);
         
         if (mysqli_num_rows($result) > 0 ) { ?>
-            <h1 class ="center-align">Meet some of our latest users</h1>
-            <ul class = "display-users">
+            <h1>Meet some of our latest users</h1>
+            <ul>
                 <?php while ($row = mysqli_fetch_assoc($result)) {
                     if ($row['id'] !== $_SESSION['id']) {?>
-                    <li><a href="profiledisplay.php?id=<?php echo $row['id'];?>"><?php echo $row['username'];?>
+                    <li>
+                    
+                            <div>
+                                    <i class="fa-solid fa-dog"></i>
+                                    <a href="profiledisplay.php?id=<?php echo $row['id'];?>"><?php echo $row['username'];?></a>
+                                
+                            </div>
                         
                     </li>
                 <?php }

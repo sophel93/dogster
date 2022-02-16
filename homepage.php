@@ -7,9 +7,9 @@ $id = $_SESSION['id'];?>
 
     <h1>Welcome, <?php echo $_SESSION['username'];?>!</h1>
     
-    <div class ="profile-info-wrapper">
+    <div>
         
-            <img src ="" class="profile-img" alt ="Profile Image">
+            <img src ="" alt ="Profile Image">
             <a href ="edit-profile.php"><button > Edit profile </button></a>
         
             <ul>
@@ -17,10 +17,10 @@ $id = $_SESSION['id'];?>
                 <li>Sex: <?php echo $_SESSION['sex'] ?? '';?></li>
                 <li>Breed</li>
                 <li>Location</li>
-                <li class="flex-grow-2">Additional information: <?php echo $_SESSION['additional_info'] ?? '';?></li>
+                <li>Additional information: <?php echo $_SESSION['additional_info'] ?? '';?></li>
             </ul>
     </div>
-    <div class = "user-favorites-wrapper">
+    <div>
         <?php  require_once 'includes\dbhandler.php';
 
             $sql = "SELECT

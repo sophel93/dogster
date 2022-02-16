@@ -2,7 +2,7 @@
 
 ?>
 
-<section class="login-form">
+<section>
     <form action="includes\login.inc.php" method="post">
         <input type="text" name="username" placeholder="Username"></input>
         <input type="password" name="password" placeholder="Password"></input>

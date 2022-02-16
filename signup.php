@@ -2,7 +2,7 @@
 
 ?>
 
-<section class="signup-form">
+<section>
     <form action="includes\signup.inc.php" method="post">
         <input type="text" name="username" placeholder="Create username"></input>
         <input type="password" name="password" placeholder="Create password"></input>

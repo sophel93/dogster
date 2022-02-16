@@ -4,7 +4,7 @@ require 'header.php';
 
 ?>
 
-<section class="edit-profile-form">
+<section>
     <form action="includes\edit-profile.inc.php" method="post">
         <input type = "hidden" name ="id" value="<?php echo $_SESSION['id']; ?>"></input>
         <input type="text" name="username" placeholder="Username" value = "<?php echo $_SESSION['username'];?>"></input>

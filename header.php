@@ -13,22 +13,27 @@ session_start();
     <script src="https://kit.fontawesome.com/a1f8d3e529.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav>
-    <div>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-</ul>
-<ul>
-    <?php if (isset($_SESSION['id'])) {
-        echo '<li><a href="homepage.php">My profile</a></li>';
-        echo '<li><a href="includes\logout.inc.php">Log out</a></li>';
-    
-    } else {
-        echo '<li><a href="signup.php">Sign up</a></li>';
-        echo '<li><a href="login.php">Log in</a></li>';
-    } ?>
-</ul>
-</div>
-</nav>
 
-<main class = "" >
+
+    <nav>
+        <div>
+            <ul>
+                    <li><a href="index.php">Home</a></li>
+            </ul>
+            
+            <ul>
+                <?php if (isset($_SESSION['id'])) {
+                    echo '<li><a href="homepage.php">My profile</a></li>';
+                    echo '<li><a href="includes\logout.inc.php">Log out</a></li>';
+                
+                } else {
+                    echo '<li><a href="signup.php">Sign up</a></li>';
+                    echo '<li><a href="login.php">Log in</a></li>';
+                } ?>
+            </ul>
+        </div>
+    </nav>
+
+
+
+<main>

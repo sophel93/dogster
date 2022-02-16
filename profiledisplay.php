@@ -18,15 +18,15 @@
 ?>
 
 
-<section class = "profile-info"> 
-    <div class = "wrapper">
+<section  "profile-info"> 
+    <div  "wrapper">
         <h1><?php echo $name;?></h1>
         <ul>
             <li>Age: <?php echo $age; ?></li>
             <li>Sex:<?php echo $sex; ?></li>
             <li>Breed</li>
             <li>Location</li>
-            <li class="flex-grow-2">Additional information: <?php echo $additional_info;?></li>
+            <li flex-grow-2">Additional information: <?php echo $additional_info;?></li>
         </ul>
             
         <?php   // Jos tällä sivulla näkyvä profiili ei ole nykyisen käyttäjän suosikeissa
@@ -48,10 +48,10 @@
                 $return_value = implode($row);
 
          if ($return_value > 0){?>
-            <a class = "remove-from-favorites" href="includes\remove-from-favorites.inc.php?id=<?php echo $id ;?>"><i class="fa-solid fa-heart"></i></a>
+            <a href="includes\remove-from-favorites.inc.php?id=<?php echo $id ;?>"><i class="fa-solid fa-heart"></i></a>
                     
         <?php } else {?>
-            <a class = "add-to-favorites" href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>"><i class="fa-regular fa-heart"></i></a>
+            <a href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>"><i class="fa-regular fa-heart"></i></a>
         <?php } ?>
     
     </div>
