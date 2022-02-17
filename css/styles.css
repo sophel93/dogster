@@ -1,0 +1,140 @@
+@import 'typography.css';
+@import 'colors.css';
+
+body{
+    margin: 0;
+    background-color: var(--cultured);
+}
+
+nav{
+    background-color: var(--rich-black-fogra29);
+}
+
+main{
+    padding: 0 6em 0 6em;
+}
+
+ul{
+    list-style-type: none;
+}
+ul > li{
+    margin: 0.4em;
+}
+.ul-rtl{
+    padding: 0 40px 0 0;
+}
+ul > li > a{
+    text-decoration: none;
+    color: var(--cultured);
+    transition: 0.3s;
+}
+
+ul > li > a:hover{
+    color: var(--princeton-orange);
+}
+.users-list{
+    display: flex;
+    flex-flow: wrap;
+}
+.users-list > li {
+    width: 25%;
+    border: solid 0.8pt var(--rich-black-fogra39);
+    border-radius: 4pt;
+}
+.users-list > li > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.users-list > li > div > i{
+    margin: 0.8em;
+}
+.users-list > li > div > a{
+    margin: 0.8em;
+    text-transform: capitalize;
+}
+nav > div{
+    display: flex;
+    justify-content: space-between;
+}
+nav > div > ul{
+    display: flex;
+}
+
+.hero{
+    height: 100vh;
+    position: relative;
+}
+
+.hero-content-wrapper{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    
+}
+.content >h1{
+    text-align: center;
+}
+.wrapper{
+    margin: 5em 0 5em 0;
+}
+.wrapper > h1{
+    text-transform: capitalize;
+}
+.wrapper > a{
+    color: var(--rich-black-fogra39);
+    text-decoration: none;
+}
+
+.wrapper > form{
+    display: flex;
+    flex-flow: column;
+}
+
+.flex-wrapper > ul > li > a{
+    color: var(--rich-black-fogra39);
+}
+footer{
+    bottom: 0;
+    width: 100vw;
+    background-color: var(--dark-liver);
+    padding: 1em;
+}
+button{
+    border: none;
+    border-radius: 5px;
+    background-color: var(--flame);
+    padding: 0.8em;
+    color: var(--cultured);
+    font-family: 'Open Sans';
+    font-size: inherit;
+    box-shadow: 1px 1px 2px var(--dark-liver);
+    transition: 0.3s;
+}
+
+button:hover{
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.signup{
+    height: 100vh;
+    position: relative;
+}
+.form-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+form{
+    display: flex;
+    flex-flow: column;
+}
+input, select{
+    margin: 1em 0;
+    padding:  0.8em 0 0.8em 0;
+}
+form > h1{
+    text-align: center;
+}

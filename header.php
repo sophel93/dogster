@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dogster - Make new four legged friends!</title>
     <link rel = "stylesheet" href = "css\styles.css">
-    <script src="https://kit.fontawesome.com/a1f8d3e529.js" crossorigin="anonymous"></script>
+    
 </head>
 <body>
 
@@ -18,17 +18,17 @@ session_start();
     <nav>
         <div>
             <ul>
-                    <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php"><i class="fa-solid fa-house"></i> Home</a></li>
             </ul>
             
-            <ul>
+            <ul class="ul-rtl">
                 <?php if (isset($_SESSION['id'])) {
-                    echo '<li><a href="homepage.php">My profile</a></li>';
-                    echo '<li><a href="includes\logout.inc.php">Log out</a></li>';
+                    echo '<li><a href="homepage.php"><i class="fa-solid fa-paw"></i> My profile</a></li>';
+                    echo '<li><a href="includes\logout.inc.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a></li>';
                 
                 } else {
-                    echo '<li><a href="signup.php">Sign up</a></li>';
-                    echo '<li><a href="login.php">Log in</a></li>';
+                    echo '<li><a href="signup.php"><i class="fa-solid fa-paw"></i> Sign up</a></li>';
+                    echo '<li><a href="login.php"><i class="fa-solid fa-right-to-bracket"></i> Log in</a></li>';
                 } ?>
             </ul>
         </div>
