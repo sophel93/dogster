@@ -30,7 +30,8 @@ function useridExists($connect, $userid){
 
 
     if ($row = mysqli_fetch_assoc($results)) {
-        return $row;
+        $row['username'] = $userid;
+        return $userid;
     } else {
         $results = false;
         return $results;
@@ -111,10 +112,10 @@ function loginUser($connect, $userid, $userpwd){
     }
 }
 
-function emptyInput($userid, $age, $sex, $additionalInfo){
+function emptyInput($userid, $age, $sex, $breed, $location, $additionalInfo){
     $result;
 
-    if(empty($userid) || empty($age) || empty($sex) || empty($additionalInfo)){
+    if(empty($userid) || empty($age) || empty($sex) || empty($breed) || empty($location) || empty($additionalInfo)){
         $result = true;
     } else{
         $result = false;
@@ -124,29 +125,63 @@ function emptyInput($userid, $age, $sex, $additionalInfo){
 }
 
 
-function updateUserInfo($connect, $id, $userid, $age, $sex, $additionalInfo){
+function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $additionalInfo, $backEndPath, $frontEndPath){
     
     $sql = "UPDATE signup_info 
-                SET username= ?, age= ?, sex= ?, additional_info= ? 
+                SET username= ?, age= ?, sex= ?, breed=?, location= ?, additional_info= ? 
                 WHERE id=$id";
 
     $stmt = mysqli_stmt_init($connect);
-
+    
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../edit-profile.php?error=stmtfailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ssss", $userid, $age, $sex, $additionalInfo);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
+    $useridExists = useridExists($connect, $userid);
+    if ($useridExists !== false && $useridExists !== $userid){
+        
+        header("location: ../edit-profile.php?error=usernametaken");
+        exit();
+    
+    } else {
+        mysqli_stmt_bind_param($stmt, "sissss", $userid, $age, $sex, $breed, $location, $additionalInfo);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
 
-    session_start();
-    $_SESSION['id'] = $id;
-    $_SESSION['username'] = $userid;
-    $_SESSION['age'] = $age;
-    $_SESSION['location'] = $location;
-    $_SESSION['additional_info'] = $additionalInfo;
+            session_start();
+            $_SESSION['id'] = $id;
+            $_SESSION['username'] = $userid;
+            $_SESSION['age'] = $age;
+            $_SESSIOM['sex'] = $sex;
+            $_SESSION['breed'] = $breed;
+            $_SESSION['location'] = $location;
+            $_SESSION['additional_info'] = $additionalInfo;
+    }
+    
+    if ($backEndPath){
+        
+        $sql = "INSERT INTO profile_images (path) VALUES (?);";
+        
+        $stmt = mysqli_stmt_init($connect);
+
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("location: ../edit-profile.php?error=stmtfailed");
+        exit();
+        }
+
+        mysqli_stmt_bind_param($stmt, "s", $frontEndPath);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        
+        $profileImgId = mysqli_insert_id($connect);
+         
+        $sql = "UPDATE signup_info
+                    SET profile_img_id = $profileImgId
+                    WHERE id = $id";
+        mysqli_query($connect, $sql);
+
+    }
     
     header("Location: ../edit-profile.php?error=none");
     exit();
@@ -181,11 +216,11 @@ function getUserInfo($connect, $id){
     
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         
-        header("location: signup.php?error=stmtfailed");
+        header("location: homepage.php?error=stmtfailed");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
 
     $results = mysqli_stmt_get_result($stmt);
@@ -235,5 +270,30 @@ function removeFromFavorites($connect, $target_user_id, $user_id){
     mysqli_close($connect);
     session_start();
     exit();
+}
+
+function filterUsers($connect, $location){
+    $sql = "SELECT * FROM signup_info WHERE location=?;";
+
+    $stmt = mysqli_stmt_init($connect);
+    
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        
+        header("location: index.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $location);
+    mysqli_stmt_execute($stmt);
+
+    $results = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($results)) {
+        header("location: index.php?error=none");
+        exit();
+    } else {
+        header("location: index.php?error=no_users_found");
+        exit();
+    }
 }
 

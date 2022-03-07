@@ -11,7 +11,7 @@ nav{
 }
 
 main{
-    padding: 0 6em 0 6em;
+    padding: 4em 8em 4em 8em;
 }
 
 ul{
@@ -35,12 +35,19 @@ ul > li > a:hover{
 .users-list{
     display: flex;
     flex-flow: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    margin: 1em 0 1em 0;
 }
-.users-list > li {
-    width: 25%;
-    border: solid 0.8pt var(--rich-black-fogra39);
-    border-radius: 4pt;
-}
+.users-list h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6{
+                width: 100%;
+            }
+
 .users-list > li > div{
     display: flex;
     flex-direction: column;
@@ -50,8 +57,24 @@ ul > li > a:hover{
     margin: 0.8em;
 }
 .users-list > li > div > a{
-    margin: 0.8em;
     text-transform: capitalize;
+    text-decoration: none;
+    color: var(--flame);
+    transition: 0.3s;
+    margin-bottom: 0.8em;
+}
+.users-list > li > div > a:hover{
+    text-shadow: 1px 1px 2px var(--flame);
+}
+.users-list-profile-img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;             
+    border-radius: 50%; 
+    height: 6em; 
+    width: 6em;
+    border: 4px solid var(--princeton-orange);
+    margin-bottom: 0.8em;
 }
 nav > div{
     display: flex;
@@ -74,9 +97,7 @@ nav > div > ul{
 }
 .content >h1{
     text-align: center;
-}
-.wrapper{
-    margin: 5em 0 5em 0;
+    margin: 1em 0 1em 0;
 }
 .wrapper > h1{
     text-transform: capitalize;
@@ -91,41 +112,52 @@ nav > div > ul{
     flex-flow: column;
 }
 
+.flex-wrapper{
+    display: flex;
+    flex-flow: wrap;
+    gap: 1em;
+}
+
+ .flex-wrapper > a{
+    color: var(--rich-black-fogra39);
+    text-decoration: none;
+}
+
 .flex-wrapper > ul > li > a{
     color: var(--rich-black-fogra39);
 }
+
 footer{
     bottom: 0;
-    width: 100vw;
     background-color: var(--dark-liver);
     padding: 1em;
 }
 button{
     border: none;
     border-radius: 5px;
-    background-color: var(--flame);
+    background: var(--princeton-orange);
+    background: linear-gradient(180deg, var(--princeton-orange) 0%, var(--flame) 100% );
     padding: 0.8em;
     color: var(--cultured);
     font-family: 'Open Sans';
     font-size: inherit;
-    box-shadow: 1px 1px 2px var(--dark-liver);
+    box-shadow: 1px 1px 2px var(--flame);
     transition: 0.3s;
+    /*max-width: fit-content;*/
 }
 
 button:hover{
     cursor: pointer;
     box-shadow: none;
+    background: linear-gradient(180deg, var(--flame) 0%, var(--princeton-orange) 100% );
 }
 
-.signup{
+.signup, .log-in{
     height: 100vh;
     position: relative;
 }
 .form-wrapper{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding: 2em;
 }
 form{
     display: flex;
@@ -134,7 +166,49 @@ form{
 input, select{
     margin: 1em 0;
     padding:  0.8em 0 0.8em 0;
+    max-width: fit-content;
 }
 form > h1{
     text-align: center;
+}
+
+.alert{
+    border: solid var(--flame);
+    border-radius: 0 0 8px 8px;
+    padding: 0 0.8em 0 0.8em;
+    background: var(--princeton-orange);
+    background: linear-gradient(180deg, var(--princeton-orange) 0%, var(--flame) 100% );
+    text-align: center;
+    color: var(--cultured);
+}
+.edit-profile{
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.edit-profile-btn{
+    flex-basis: 100%;
+}
+
+.form-group-s{
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+}
+.form-group-l{
+    width: 100%;
+}
+
+.profile-img{
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+    border: 8px solid var(--princeton-orange);
+}
+
+.favorite-user{
+    margin: 1em 0 0 0;
+    flex-basis: 100%;
 }
