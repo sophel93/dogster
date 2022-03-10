@@ -23,7 +23,7 @@ if (isset($_SESSION['id'])) {
             
                 <ul class="users-list">
                     <?php while ($row = mysqli_fetch_assoc($result)) {
-                        if ($row['id'] !== $_SESSION['id']) {?>
+                        if (intval($row['id']) !== $_SESSION['id']) {?>
                             
                             <li> 
                                 <div>

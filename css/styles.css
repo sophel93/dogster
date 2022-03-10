@@ -87,6 +87,9 @@ nav > div > ul{
 .hero{
     height: 100vh;
     position: relative;
+    /*background-image: url('../images/729709408-huge.jpg');
+    background-position: center;
+    background-size: cover;*/
 }
 
 .hero-content-wrapper{
@@ -143,7 +146,7 @@ button{
     font-size: inherit;
     box-shadow: 1px 1px 2px var(--flame);
     transition: 0.3s;
-    /*max-width: fit-content;*/
+    width: fit-content;
 }
 
 button:hover{
@@ -211,4 +214,26 @@ form > h1{
 .favorite-user{
     margin: 1em 0 0 0;
     flex-basis: 100%;
+}
+@media (max-width: 575.98px){
+    main{
+        padding: 2.8em 1.6em 1.6em 2.8em;
+    }
+
+    nav > div{
+        flex-flow: column;
+    }
+    nav > div > ul{
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+    .ul-rtl{
+        padding: 0;
+    }
+
+    .edit-profile{
+        flex-flow: column;
+    }
 }

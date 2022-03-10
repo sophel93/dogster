@@ -27,12 +27,11 @@ function useridExists($connect, $userid){
     mysqli_stmt_execute($stmt);
 
     $results = mysqli_stmt_get_result($stmt);
+    
 
-
-    if ($row = mysqli_fetch_assoc($results)) {
-        $row['username'] = $userid;
-        return $userid;
-    } else {
+    if ($row=mysqli_fetch_assoc($results)){
+        return $row;
+    } else{
         $results = false;
         return $results;
     }
@@ -139,10 +138,11 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $
     }
 
     $useridExists = useridExists($connect, $userid);
-    if ($useridExists !== false && $useridExists !== $userid){
-        
+    if ($useridExists !== false ){
+        if ($userid !== $_SESSION['username']){
         header("location: ../edit-profile.php?error=usernametaken");
         exit();
+        }
     
     } else {
         mysqli_stmt_bind_param($stmt, "sissss", $userid, $age, $sex, $breed, $location, $additionalInfo);
@@ -188,22 +188,29 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $
 }
 
 function deleteUser($connect, $id){
-    $sql = "DELETE FROM signup_info WHERE id=$id";
+    $sql = "DELETE FROM signup_info WHERE id = ?";
 
-    if (mysqli_query($connect, $sql)){
+    $stmt = mysqli_stmt_init($connect);
         
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../edit-profile.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    
+    if (mysqli_stmt_execute($stmt)){
+
         session_start();
         session_unset();
         session_destroy();
 
         header("location: ../index.php");
-        echo "Profile deleted.";
+
     }
-
-    mysqli_close($connect);
-    exit ();
+    mysqli_stmt_close($stmt);
 }
-
+    
 function getUserInfo($connect, $id){
     
     require_once 'includes\dbhandler.php';

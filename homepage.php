@@ -30,24 +30,23 @@ $id = $_SESSION['id'];
 
     mysqli_stmt_close($stmt);
 
-    $row = mysqli_fetch_assoc($result);
-    $backEndPath = $row['path']; ?>
+    $row = mysqli_fetch_assoc($result);?>
 
 
 <section>
 
-<h1>Welcome, <?php echo $_SESSION['username'];?>!</h1>
+<h1>Welcome, <?php echo $row['username'];?>!</h1>
 
     <div class="flex-wrapper">
         
-        <div class ="profile-img" style="background-image: url('<?php echo $backEndPath;?>');"></div>
-        
+        <div class ="profile-img" style="background-image: url('<?php echo $row['path'];?>');"></div>
+            
             <ul class = "profile-info">
-                <li>Age: <?php echo $_SESSION['age'] ?? '';?></li>
-                <li>Sex: <?php echo $_SESSION['sex'] ?? '';?></li>
-                <li>Breed: <?php echo $_SESSION['breed'] ?? '';?></li>
-                <li>Location: <?php echo $_SESSION['location'] ?? '';?></li>
-                <li>Additional information: <?php echo $_SESSION['additional_info'] ?? '';?></li>
+                <li>Age: <?php echo $row['age'] ?? '';?></li>
+                <li>Sex: <?php echo $row['sex'] ?? '';?></li>
+                <li>Breed: <?php echo $row['breed'] ?? '';?></li>
+                <li>Location: <?php echo $row['location'] ?? '';?></li>
+                <li>Additional information: <?php echo $row['additional_info'] ?? '';?></li>
             </ul>
             <a href ="edit-profile.php" class = "edit-profile-btn"><button > Edit profile </button></a>
     </div>
@@ -55,7 +54,7 @@ $id = $_SESSION['id'];
 <h2>Favorites</h2>
     
     <div class="flex-wrapper">
-        <?php  require_once 'includes\dbhandler.php';
+        <?php 
             
             $sql = "SELECT
                         user_favorites.target_user_id,
@@ -68,18 +67,15 @@ $id = $_SESSION['id'];
                         user_favorites.user_id = $id;";
 
             $result = mysqli_query($connect, $sql);
+            //$row = mysqli_fetch_assoc($result);
 
             if (mysqli_num_rows($result) > 0 ) { ?>
 
             <ul class = "users-list">
-
-                <?php while ($row = mysqli_fetch_assoc($result)){
-                   ?>
-                    
+                <?php while ($row = mysqli_fetch_assoc($result)){?>
                 <li>
                     <div>
                         <i class="fa-solid fa-dog"></i>
-                                
                         <a href ="profiledisplay.php?id=<?php echo $row['id']; ?>"><?php echo $row['username'];?></a>
                     </div>
                 </li>
