@@ -136,27 +136,26 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $
         header("location: ../edit-profile.php?error=stmtfailed");
         exit();
     }
-
     $useridExists = useridExists($connect, $userid);
-    if ($useridExists !== false ){
-        if ($userid !== $_SESSION['username']){
-        header("location: ../edit-profile.php?error=usernametaken");
-        exit();
-        }
+    
+    if ($_SESSION['username'] === $userid || $useridExists !== $userid){
+        
+        mysqli_stmt_bind_param($stmt, "sissss", $userid, $age, $sex, $breed, $location, $additionalInfo);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        session_start();
+        $_SESSION['id'] = $id;
+        $_SESSION['username'] = $userid;
+        $_SESSION['age'] = $age;
+        $_SESSIOM['sex'] = $sex;
+        $_SESSION['breed'] = $breed;
+        $_SESSION['location'] = $location;
+        $_SESSION['additional_info'] = $additionalInfo;
     
     } else {
-        mysqli_stmt_bind_param($stmt, "sissss", $userid, $age, $sex, $breed, $location, $additionalInfo);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-
-            session_start();
-            $_SESSION['id'] = $id;
-            $_SESSION['username'] = $userid;
-            $_SESSION['age'] = $age;
-            $_SESSIOM['sex'] = $sex;
-            $_SESSION['breed'] = $breed;
-            $_SESSION['location'] = $location;
-            $_SESSION['additional_info'] = $additionalInfo;
+        header("location: ../edit-profile.php?error=usernametaken");
+        exit();
     }
     
     if ($backEndPath){

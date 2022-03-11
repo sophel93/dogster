@@ -30,7 +30,7 @@ if (isset($_GET["error"])) { ?>
             <option value="spayed female">Spayed Female</option>
         </select>
         <label for="profile-img">Change profile image</label>
-        <input type="file" name="profile-img"></input>
+        <input type="file" name="profile-img" value= "<?php echo $_SESSION['path'] ?? '' ?>"></input>
     </div>
         
         <div class="form-group-s">

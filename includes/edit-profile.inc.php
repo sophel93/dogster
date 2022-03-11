@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define("ENV_ROOT_DIRECTORY", "C:\\xampp\\htdocs\\dogster\\");
 
 if(isset($_POST['update'])){
