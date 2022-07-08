@@ -1,9 +1,14 @@
 <?php
 
-$host = "sql11.freesqldatabase.com";
+/*$host = "sql11.freesqldatabase.com";
 $username ="sql11478953";
 $password = "vrCcuh9QwZ";
-$database = "sql11478953";
+$database = "sql11478953";*/
+
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "dogsterdb";
 
 $connect = mysqli_connect($host, $username, $password, $database);
 

@@ -1,6 +1,7 @@
-<?php require_once 'header.php';
+<?php   require_once 'header.php';
+        require 'aside.php';
 
-    require_once 'includes\dbhandler.php';
+        require_once 'includes\dbhandler.php';
 
     $id = $_GET['id'];
 
@@ -43,44 +44,45 @@
 ?>
 
 
-<section>
-<h1><?php echo $name;?></h1>
-    <div class="flex-wrapper">
-        
-        <div class="profile-img" style="background-image: url('<?php echo $backEndPath; ?>');"></div>
-        <ul>
-            <li>Age: <?php echo $age; ?></li>
-            <li>Sex: <?php echo $sex; ?></li>
-            <li>Breed: <?php echo $breed;?></li>
-            <li>Location: <?php echo $location;?></li>
-            <li>Additional information: <?php echo $additional_info;?></li>
+<section class="flex-column margin-aside">
+    <div class="wrapper flex-column align-flex-start">
+        <h1><?php echo $name;?></h1>
+        <ul class = "profile-info">
+            <li class="profile-img" style="background-image: url('<?php echo $backEndPath;?>');"></li>
+            <ul>
+                <li>Age: <li><?php echo $age; ?></li></li>
+                <li>Sex: <li><?php echo $sex; ?></li></li>
+                <li>Location: <li><?php echo $location;?></li></li>
+                <li>Breed: <li><?php echo $breed;?></li></li>
+            </ul>
         </ul>
-            
-        <?php 
-        
-
-        require_once 'includes\dbhandler.php';
-                
-        $current_user = $_SESSION['id'];
-                
-        $sql = "SELECT 
-                    COUNT(target_user_id)
-                FROM
-                    user_favorites
-                WHERE
-                    user_id = $current_user
-                AND target_user_id = $id;";
-
-        $result = mysqli_query($connect, $sql);
-        $row = mysqli_fetch_assoc($result);
-        $return_value = implode($row);
-
-        if ($return_value > 0){?>
-            <a class ="favorite-user" href="includes\remove-from-favorites.inc.php?id=<?php echo $id ;?>"><button><i class="fa-regular fa-heart"></i> Remove profile from favorites</button></a>
+        <h2>About me</h2>
+        <p><?php echo $additional_info;?></p>
+        <div class="flex-row justify-flex-end">
+            <?php 
+                require_once 'includes\dbhandler.php';
                     
-        <?php } else {?>
-            <a class ="favorite-user" href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>"><button><i class="fa-solid fa-heart"></i> Add profile to favorites</button></a>
-        <?php }?>
+                $current_user = $_SESSION['id'];
+                        
+                $sql = "SELECT 
+                            COUNT(target_user_id)
+                        FROM
+                            user_favorites
+                        WHERE
+                            user_id = $current_user
+                        AND target_user_id = $id;";
+
+                $result = mysqli_query($connect, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $return_value = implode($row);
+
+                if ($return_value > 0){?>
+                    <a class ="favorite-user" href="includes\remove-from-favorites.inc.php?id=<?php echo $id ;?>"><button><i class="fa-regular fa-heart"></i> Remove profile from favorites</button></a>
+                <?php } else {?>
+                    <a class ="favorite-user" href="includes\add-to-favorites.inc.php?id=<?php echo $id; ?>"><button><i class="fa-solid fa-heart"></i> Add profile to favorites</button></a>
+                <?php }?>
+        </div>
+        
     
     </div>
 </section>

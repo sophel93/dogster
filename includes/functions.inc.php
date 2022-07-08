@@ -124,10 +124,10 @@ function emptyInput($userid, $age, $sex, $breed, $location, $additionalInfo){
 }
 
 
-function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $additionalInfo, $backEndPath, $frontEndPath){
+function updateUserInfo($connect, $id, $age, $sex, $breed, $location, $additionalInfo, $backEndPath, $frontEndPath){
     
     $sql = "UPDATE signup_info 
-                SET username= ?, age= ?, sex= ?, breed=?, location= ?, additional_info= ? 
+                SET age= ?, sex= ?, breed=?, location= ?, additional_info= ? 
                 WHERE id=$id";
 
     $stmt = mysqli_stmt_init($connect);
@@ -136,28 +136,19 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $
         header("location: ../edit-profile.php?error=stmtfailed");
         exit();
     }
-    $useridExists = useridExists($connect, $userid);
-    
-    if ($_SESSION['username'] === $userid || $useridExists !== $userid){
         
-        mysqli_stmt_bind_param($stmt, "sissss", $userid, $age, $sex, $breed, $location, $additionalInfo);
+        mysqli_stmt_bind_param($stmt, "issss", $age, $sex, $breed, $location, $additionalInfo);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
         session_start();
         $_SESSION['id'] = $id;
-        $_SESSION['username'] = $userid;
         $_SESSION['age'] = $age;
         $_SESSIOM['sex'] = $sex;
         $_SESSION['breed'] = $breed;
         $_SESSION['location'] = $location;
         $_SESSION['additional_info'] = $additionalInfo;
-    
-    } else {
-        header("location: ../edit-profile.php?error=usernametaken");
-        exit();
-    }
-    
+
     if ($backEndPath){
         
         $sql = "INSERT INTO profile_images (path) VALUES (?);";
@@ -181,7 +172,6 @@ function updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $
         mysqli_query($connect, $sql);
 
     }
-    
     header("Location: ../edit-profile.php?error=none");
     exit();
 }

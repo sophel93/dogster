@@ -1,9 +1,9 @@
-<?php require 'header.php';
+<?php   require 'header.php';
+        require 'aside.php';
+        require_once 'includes\dbhandler.php';
 
-require_once 'includes\dbhandler.php';
-
-$id = $_SESSION['id'];
-
+    $id = $_SESSION['id'];
+    
     /*$sql = "SELECT * FROM signup_info WHERE id = ?;";*/
     $sql = "SELECT
             profile_images.path,
@@ -30,66 +30,35 @@ $id = $_SESSION['id'];
 
     mysqli_stmt_close($stmt);
 
-    $row = mysqli_fetch_assoc($result);?>
+    $row = mysqli_fetch_assoc($result);
+?>
 
 
-<section>
-
-<h1>Welcome, <?php echo $row['username'];?>!</h1>
-
-    <div class="flex-wrapper">
-        
-        <div class ="profile-img" style="background-image: url('<?php echo $row['path'];?>');"></div>
-            
-            <ul class = "profile-info">
-                <li>Age: <?php echo $row['age'] ?? '';?></li>
-                <li>Sex: <?php echo $row['sex'] ?? '';?></li>
-                <li>Breed: <?php echo $row['breed'] ?? '';?></li>
-                <li>Location: <?php echo $row['location'] ?? '';?></li>
-                <li>Additional information: <?php echo $row['additional_info'] ?? '';?></li>
-            </ul>
-            <a href ="edit-profile.php" class = "edit-profile-btn"><button > Edit profile </button></a>
-    </div>
-        
-<h2>Favorites</h2>
-    
-    <div class="flex-wrapper">
-        <?php 
-            
-            $sql = "SELECT
-                        user_favorites.target_user_id,
-                        signup_info.*
-                    FROM
-                        user_favorites
-                        LEFT JOIN signup_info
-                        ON signup_info.id = user_favorites.target_user_id
-                    WHERE
-                        user_favorites.user_id = $id;";
-
-            $result = mysqli_query($connect, $sql);
-            //$row = mysqli_fetch_assoc($result);
-
-            if (mysqli_num_rows($result) > 0 ) { ?>
-
-            <ul class = "users-list">
-                <?php while ($row = mysqli_fetch_assoc($result)){?>
-                <li>
-                    <div>
-                        <i class="fa-solid fa-dog"></i>
-                        <a href ="profiledisplay.php?id=<?php echo $row['id']; ?>"><?php echo $row['username'];?></a>
-                    </div>
-                </li>
-                <?php } ?>
-            </ul> 
-
-<?php } else {?>
-    <p>No favorites to display </p><?php }
 
 ?>
-</div>
-    
-   
 
+<section class="flex-column margin-aside">
+    <div class="wrapper flex-column align-flex-start">
+        <h1><?php echo $row['username'];?></h1>  
+        <ul class = "profile-info">
+            <li class="profile-img" style="background-image: url('<?php echo $row['path'];?>');"></li>
+            <ul>
+                <li class="label">Age: <li><?php echo $row['age'] ?? '';?></li></li>
+                <li class="label">Sex: <li><?php echo $row['sex'] ?? '';?></li></li>
+                <li class="label">Breed: <li><?php echo $row['breed'] ?? '';?></li></li>
+                <li class="label">Location: <li><?php echo $row['location'] ?? '';?></li></li>
+            </ul>
+                <!--<li class="label">Additional information: <li></li></li>-->
+        </ul>
+        <h2>About me</h2>
+        <p><?php echo $row['additional_info'] ?? '';?></p>
+        
+            <form action="includes\edit-profile.inc.php" method="post" class="flex-row justify-flex-end">
+                <button class="warning" type="submit" name="delete">Delete profile</button>
+                <a href="edit-profile.php">Edit profile</a>
+            </form>
+        
+    </div>
 </section>
 
 <?php require 'footer.php'; ?>

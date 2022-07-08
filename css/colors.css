@@ -1,13 +1,11 @@
 /* CSS HEX */
 :root{
-    
---cultured: #f9f9f9ff;
---dark-liver: #524948ff;
---princeton-orange: #ee7b30ff;
---flame: #eb5e28ff;
---green-blue-crayola: #058ed9ff;
---rich-black-fogra39: #0b0a0a;
---rich-black-fogra29: #011a28;
+--black: #000000;
+--white: #FFFFFF;
+--highlight-gray: #E2E2E2;
+--light-gray: #FAFAFA;
+--contrast-gray: #AEAEAE;
+--warning: #EB6D6D;
 
 }
 

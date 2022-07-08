@@ -6,7 +6,6 @@ define("ENV_ROOT_DIRECTORY", "C:\\xampp\\htdocs\\dogster\\");
 
 if(isset($_POST['update'])){
     $id = $_POST['id'];
-    $userid = $_POST['username'];
     $age = $_POST['age'];
     $sex = $_POST['sex'];
     $breed = $_POST['breed'];
@@ -23,7 +22,7 @@ if(isset($_POST['update'])){
     
     move_uploaded_file($_FILES['profile-img']['tmp_name'], $backEndPath );
     
-    updateUserInfo($connect, $id, $userid, $age, $sex, $breed, $location, $additionalInfo, $backEndPath, $frontEndPath);
+    updateUserInfo($connect, $id, $age, $sex, $breed, $location, $additionalInfo, $backEndPath, $frontEndPath);
     
 }
 

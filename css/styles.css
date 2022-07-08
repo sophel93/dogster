@@ -1,70 +1,120 @@
 @import 'typography.css';
 @import 'colors.css';
 
+:root .flex-row{
+    display: flex;
+    flex-flow: row;
+    gap: 16px;
+}
+
+:root .flex-column{
+    display: flex;
+    flex-flow: column;
+}
+
+:root .align-flex-start{
+    align-items: flex-start;
+}
+
+:root .justify-flex-end{
+    justify-content: flex-end;
+    width: 100%;
+}
+
 body{
     margin: 0;
     background-color: var(--cultured);
 }
 
+
+/* navbar */
+
 nav{
-    background-color: var(--rich-black-fogra29);
+    background-color: var(--highlight-gray);
+    padding: 0 3em;
 }
 
 main{
-    padding: 4em 8em 4em 8em;
+    margin-top: 1.5em;
+}
+
+section{
+    display: flex;
+    min-height: 60vh;
+}
+
+.wrapper{
+    width: fit-content;
+}
+
+.margin-aside{
+    margin-left: 32vw;
+}
+
+.aside-wrapper{
+    position: absolute;
+    width: 25%;
+}
+
+aside{
+    padding: 1.5em 3em;
+    border-radius: 10px;
+    background: var(--light-gray);
+    margin-top: 1.5em;
 }
 
 ul{
     list-style-type: none;
 }
 ul > li{
-    margin: 0.4em;
 }
 .ul-rtl{
-    padding: 0 40px 0 0;
 }
 ul > li > a{
     text-decoration: none;
-    color: var(--cultured);
-    transition: 0.3s;
+    color: var(--black);
 }
 
-ul > li > a:hover{
-    color: var(--princeton-orange);
+.profile-info{
+    display: flex;
+    min-width: 50vw;
+    padding: 0.8em;
+    border-radius: 10px;
+    background: var(--light-gray);
 }
+.profile-info .profile-img{
+    border-radius: 5px;
+    min-width: 25vw;
+    min-height: 25vh;
+}
+.label{
+    font-weight: bolder;
+}
+
+/*ul > li > a:hover{
+    color: var(--princeton-orange);
+}*/
 .users-list{
     display: flex;
     flex-flow: wrap;
-    justify-content: space-evenly;
+    gap: 48px;
     align-items: baseline;
-    margin: 1em 0 1em 0;
+    padding: 0;
 }
-.users-list h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6{
-                width: 100%;
-            }
 
 .users-list > li > div{
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 .users-list > li > div > i{
-    margin: 0.8em;
 }
 .users-list > li > div > a{
     text-transform: capitalize;
     text-decoration: none;
-    color: var(--flame);
-    transition: 0.3s;
-    margin-bottom: 0.8em;
 }
 .users-list > li > div > a:hover{
-    text-shadow: 1px 1px 2px var(--flame);
 }
 .users-list-profile-img{
     background-repeat: no-repeat;
@@ -73,124 +123,87 @@ ul > li > a:hover{
     border-radius: 50%; 
     height: 6em; 
     width: 6em;
-    border: 4px solid var(--princeton-orange);
-    margin-bottom: 0.8em;
 }
 nav > div{
     display: flex;
     justify-content: space-between;
+
 }
 nav > div > ul{
     display: flex;
+    gap: 16px;
+    padding: 0;
 }
 
 .hero{
-    height: 100vh;
-    position: relative;
-    /*background-image: url('../images/729709408-huge.jpg');
+    height: 60vh;
+    display: flex;
+    /*position: relative;
+    background-image: url('../images/729709408-huge.jpg');
     background-position: center;
     background-size: cover;*/
 }
 
 .hero-content-wrapper{
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    
+    width: 50%;
+    margin: auto;
 }
 .content >h1{
-    text-align: center;
-    margin: 1em 0 1em 0;
-}
-.wrapper > h1{
-    text-transform: capitalize;
-}
-.wrapper > a{
-    color: var(--rich-black-fogra39);
-    text-decoration: none;
-}
-
-.wrapper > form{
-    display: flex;
-    flex-flow: column;
-}
-
-.flex-wrapper{
-    display: flex;
-    flex-flow: wrap;
-    gap: 1em;
-}
-
- .flex-wrapper > a{
-    color: var(--rich-black-fogra39);
-    text-decoration: none;
-}
-
-.flex-wrapper > ul > li > a{
-    color: var(--rich-black-fogra39);
 }
 
 footer{
     bottom: 0;
-    background-color: var(--dark-liver);
-    padding: 1em;
 }
 button{
     border: none;
-    border-radius: 5px;
-    background: var(--princeton-orange);
-    background: linear-gradient(180deg, var(--princeton-orange) 0%, var(--flame) 100% );
-    padding: 0.8em;
-    color: var(--cultured);
-    font-family: 'Open Sans';
-    font-size: inherit;
-    box-shadow: 1px 1px 2px var(--flame);
-    transition: 0.3s;
+    border-radius: 15px;
+    background: var(--contrast-gray);
     width: fit-content;
+    padding: 8px 16px;
+    color: var(--white);
 }
 
 button:hover{
     cursor: pointer;
-    box-shadow: none;
-    background: linear-gradient(180deg, var(--flame) 0%, var(--princeton-orange) 100% );
 }
 
+.warning{
+    background: var(--warning);
+    color: var(--white);
+}
 .signup, .log-in{
-    height: 100vh;
-    position: relative;
 }
 .form-wrapper{
-    padding: 2em;
+    background: var(--light-gray);
+    padding: 1.5em 3em;
+    border-radius: 10px;
+    margin:auto;
 }
 form{
     display: flex;
     flex-flow: column;
+    gap: 16px;
 }
 input, select{
-    margin: 1em 0;
-    padding:  0.8em 0 0.8em 0;
-    max-width: fit-content;
+    border-radius: 5px;
+    padding: 8px 16px;
 }
 form > h1{
     text-align: center;
 }
 
+.form-group{
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+}
+
 .alert{
-    border: solid var(--flame);
-    border-radius: 0 0 8px 8px;
-    padding: 0 0.8em 0 0.8em;
-    background: var(--princeton-orange);
-    background: linear-gradient(180deg, var(--princeton-orange) 0%, var(--flame) 100% );
-    text-align: center;
-    color: var(--cultured);
 }
 .edit-profile{
-    flex-flow: row;
-    flex-wrap: wrap;
 }
 
 .edit-profile-btn{
-    flex-basis: 100%;
 }
 
 .form-group-s{
@@ -205,19 +218,12 @@ form > h1{
 .profile-img{
     background-position: center;
     background-size: cover;
-    border-radius: 50%;
-    height: 300px;
-    width: 300px;
-    border: 8px solid var(--princeton-orange);
 }
 
 .favorite-user{
-    margin: 1em 0 0 0;
-    flex-basis: 100%;
 }
 @media (max-width: 575.98px){
     main{
-        padding: 2.8em 1.6em 1.6em 2.8em;
     }
 
     nav > div{
@@ -227,10 +233,8 @@ form > h1{
         flex-flow: column;
         justify-content: center;
         align-items: center;
-        padding: 0;
     }
     .ul-rtl{
-        padding: 0;
     }
 
     .edit-profile{
